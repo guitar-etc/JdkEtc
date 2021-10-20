@@ -23,6 +23,30 @@ However, this requires extended permissions and/or thorough insight into the imp
 
 This project will use the delegate pattern to add any modifications to existing methods and to add any new fields or methods to existing Jdk classes. Each Jdk class will have a corresponding `Etc` class (i.e. `ArrayList` -> `EtcArrayList`)
 
+## Sample (snippet from tests).
+```java
+var etcAL = EtcArrayList.of(); // type of EtcArrayList.
+		
+var holder = new Object[1];
+var removed = new Object[1];
+etcAL.setOnAfterAdd(o -> holder[0] = o);
+etcAL.setOnAfterRemove(o -> removed[0] = o);
+etcAL.add(0, "First");
+log(etcAL.size() == 1, etcAL.size()); // true
+log(etcAL.get(0).equals("First"), etcAL.get(0)); // true
+log(holder[0].equals("First"), holder[0]); // true
+
+holder[0] = null;
+		
+var setResult = etcAL.set(0, "Second"); // set is considered as a remove and then an add.
+log(setResult.equals("First"), setResult); // true
+log(etcAL.get(0).equals("Second"), etcAL.get(0)); // true
+log(holder[0].equals("Second"), holder[0]); // true
+log(removed[0].equals("First"), removed[0]); // true
+
+var al = etcAL.unEtc(); // type of ArrayList.
+```
+
 ## Goal
 
 ### Using `Base` as a placeholder for class names.
