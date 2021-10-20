@@ -22,4 +22,7 @@ For the purpose of simplicity, the document assumes `EtcList` is being created a
 		2. Generate delegate methods for the temp field, then
 		3. Generate delegate methods for the `impl` field, then finally
 		4. Remove the temp field and its delegate methods.
-		5. 
+	5. The remaining methods should be the methods that exist in `List` but not in `Collection`.
+7. Override `unEtc()` and change the return type to `List<E>` and type cast the return object.
+	1. `impl()` is only for final classes. `impl()` returns the internally managed instance and any methods called on it will not go through the `Etc` classes.
+8. 
