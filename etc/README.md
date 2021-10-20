@@ -32,19 +32,21 @@ var removed = new Object[1];
 etcAL.setOnAfterAdd(o -> holder[0] = o);
 etcAL.setOnAfterRemove(o -> removed[0] = o);
 etcAL.add(0, "First");
-log(etcAL.size() == 1, etcAL.size()); // true
-log(etcAL.get(0).equals("First"), etcAL.get(0)); // true
-log(holder[0].equals("First"), holder[0]); // true
+log(etcAL.size() == 1, etcAL.size()); // true, 1
+log(etcAL.get(0).equals("First"), etcAL.get(0)); // true, "First"
+log(holder[0].equals("First"), holder[0]); // true, "First"
 
 holder[0] = null;
 		
 var setResult = etcAL.set(0, "Second"); // set is considered as a remove and then an add.
-log(setResult.equals("First"), setResult); // true
-log(etcAL.get(0).equals("Second"), etcAL.get(0)); // true
-log(holder[0].equals("Second"), holder[0]); // true
-log(removed[0].equals("First"), removed[0]); // true
+log(setResult.equals("First"), setResult); // true, "First"
+log(etcAL.get(0).equals("Second"), etcAL.get(0)); // true, "Second"
+log(holder[0].equals("Second"), holder[0]); // true, "Second"
+log(removed[0].equals("First"), removed[0]); // true, "First"
 
 var al = etcAL.unEtc(); // type of ArrayList.
+var etcAL2 = Etc.of(al); // type of EtcArrayList.
+log(etcAL2 == etcAL, "" + etcAL2.getClass() + System.identityHashCode(etcAL2)); // true, "class etc.java.util.array_list.ArrayListDelegate2003749087"
 ```
 
 ## Goal
