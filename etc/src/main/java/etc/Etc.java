@@ -5,6 +5,7 @@ import java.util.*;
 import etc.java.lang.Object.*;
 import etc.java.util.array_list.*;
 import etc.java.util.collection.*;
+import etc.java.util.list.*;
 
 /**
  * For now, let's maintain the Etc.of chain manually.
@@ -26,5 +27,9 @@ public class Etc {
 	
 	public static <E> EtcArrayList<E> of(ArrayList<E> impl) {
 		return EtcArrayList.of(impl);
+	}
+	
+	public static <E> EtcList<E> of(List<E> impl) {
+		return EtcList.of(impl);
 	}
 }

@@ -2,7 +2,7 @@ package etc.java.util.array_list;
 
 import static etc.util.Util.*;
 
-import etc.demonstrate.*;
+import etc.*;
 
 public class Test {
 	public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class Test {
 		log(removed[0].equals("Third"), removed[0]);
 		log(al.isEmpty(), al.isEmpty());
 		
-		var etcAL2 = EtcDemonstrate.of(al);
+		var etcAL2 = Etc.of(al);
 		log(etcAL2 == etcAL, "" + etcAL2.getClass() + System.identityHashCode(etcAL2));
 		
 	}

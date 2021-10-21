@@ -7,7 +7,7 @@ import java.util.stream.*;
 import etc.java.lang.Object.*;
 
 abstract class _CollectionDelegate<E> extends ObjectDelegate {
-	private Collection<E> impl;
+	private final Collection<E> impl;
 
 	public _CollectionDelegate(Collection<E> impl) {
 		super(impl);

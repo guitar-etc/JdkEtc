@@ -1,6 +1,6 @@
 package etc.java.util.array_list;
 
-public class ArrayListDelegateDelegate<E> extends _ArrayListDelegateDelegate<E> {
+class ArrayListDelegateDelegate<E> extends _ArrayListDelegateDelegate<E> {
 
 	private static final long serialVersionUID = 1L;
 

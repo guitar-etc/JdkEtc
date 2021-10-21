@@ -79,7 +79,7 @@ public class Test {
 		log(etcSubFinal_impl instanceof SubFinal, etcSubFinal_impl);
 		log(etcSubFinal_impl == subFinal, etcSubFinal_impl);
 		
-		log(etcSubFinal.superSiblingMethod().equals("superSiblingMethod in Base in EtcSuperSibling2 in EtcSuperSibling in EtcBase"), etcSubFinal.superSiblingMethod());
+		log(etcSubFinal.superSiblingMethod().equals("superSiblingMethod in Base in EtcSuperSibling in EtcBase in EtcSuperSibling2"), etcSubFinal.superSiblingMethod());
 		
 		var holder = new String[1];
 		
@@ -103,7 +103,7 @@ public class Test {
 		
 		etcSubFinal.setOnSuperSiblingMethod(str -> holder[0] = str);
 		log(etcSubFinal.super2Method().equals("super2Method in Base in SubFinal in EtcSuper2 in EtcSuper in EtcBase"), etcSubFinal.super2Method());
-		log(etcSubFinal.superSiblingMethod().equals("superSiblingMethod in Base in EtcSuperSibling2 in EtcSuperSibling in EtcBase"), etcSubFinal.superSiblingMethod());
+		log(etcSubFinal.superSiblingMethod().equals("superSiblingMethod in Base in EtcSuperSibling in EtcBase in EtcSuperSibling2"), etcSubFinal.superSiblingMethod());
 		log(etcSubFinal.superSiblingMethod().equals(holder[0]), holder[0]);
 	}
 }

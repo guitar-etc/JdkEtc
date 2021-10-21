@@ -6,9 +6,9 @@ import java.util.stream.*;
 
 abstract class _ArrayListDelegateDelegate<E> extends ArrayList<E> {
 	private static final long serialVersionUID = 1L;
-	private ArrayListDelegate<E> delegate;
+	private final ArrayListDelegate<E> delegate;
 	
-	public ArrayListDelegate<E> delegate() {
+	ArrayListDelegate<E> delegate() {
 		return delegate;
 	}
 

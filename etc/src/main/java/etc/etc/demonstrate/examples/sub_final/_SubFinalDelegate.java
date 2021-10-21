@@ -41,12 +41,17 @@ extends BaseDelegate implements SuperSibling2DelegateFacade {
 	
 	@Override
 	public String superSiblingMethod() {
-		return onSuperSiblingMethod(super.superSiblingMethod());
+		return onSuperSiblingMethod(superSibling2Delegate().apply_superSiblingMethod(super.superSiblingMethod()));
 	}
 
-	// can't call BaseDelegate.super.apply_superSiblingMethod... for some reason.
 	@Override
 	public String apply_superSiblingMethod(String str) {
-		return superSiblingDelegate().apply_superSiblingMethod(SuperSibling2DelegateFacade.super.apply_superSiblingMethod(str));
+		return super.apply_superSiblingMethod(str);
 	}
+
+//	// can't call BaseDelegate.super.apply_superSiblingMethod... for some reason.
+//	@Override
+//	public String apply_superSiblingMethod(String str) {
+//		return super.apply_superSiblingMethod(SuperSibling2DelegateFacade.super.apply_superSiblingMethod(str));
+//	}
 }

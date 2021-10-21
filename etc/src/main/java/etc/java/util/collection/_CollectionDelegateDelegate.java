@@ -5,9 +5,9 @@ import java.util.function.*;
 import java.util.stream.*;
 
 abstract class _CollectionDelegateDelegate<E> implements Collection<E> {
-	private CollectionDelegate<E> delegate;
+	private final CollectionDelegate<E> delegate;
 	
-	public CollectionDelegate<E> delegate() {
+	CollectionDelegate<E> delegate() {
 		return delegate;
 	}
 
