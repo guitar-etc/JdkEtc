@@ -7,13 +7,14 @@ For the purpose of simplicity, the document assumes `EtcList` is being created a
 
 1. Create a package named `etc.java.util.list` that will contain all the files for `EtcList`.
 	1. Package name should be `etc.original_package_name.lowercase_class_name`.
+#### `_Delegate`
 2. Create an abstract class named `_ListDelegate<E>` that extends `CollectionDelegate<E>`.
 	1. `_Delegate` contains the logic that handles the inheritance, delegation, composition, etc. needed to build a unique structure.
 	2. `_Delegate` extends the closest `Delegate` class that exists in order to inherit the enhancements. 
 		1. If none exists, it can inherit `ObjectDelegate`.
 	3. This class is abstract because the purpose of this class is to hide the infrastructure code that will (hopefully) never change. A subclass of this class, `Delegate`, will be created in the later steps.
 4. Create a constructor that accepts `List` then pass the `List` to super.
-5. Create a `List` field named `impl` and assign the received `List` in the constructor.
+5. Create a private final `List` field named `impl` and assign the received `List` in the constructor.
 	1. This is to delegate the methods that only exist in `List` and not in `Collection` to `impl`.
 		1. Methods that exist in `Collection` should not be overriden in this class. Any enhancement will be added to `Delegate` which will be introduced in the later steps.
 6. Generate methods that delegate calls to `impl`. Be sure to only generate methods that exist in `List` and doesn't exist in `Collection`.
@@ -25,4 +26,19 @@ For the purpose of simplicity, the document assumes `EtcList` is being created a
 	5. The remaining methods should be the methods that exist in `List` but not in `Collection`.
 7. Override `unEtc()` and change the return type to `List<E>` and type cast the return object.
 	1. `impl()` is only for final classes. `impl()` returns the internally managed instance and any methods called on it will not go through the `Etc` classes.
-8. 
+#### `Delegate`
+8. Create a class named `ListDelegate<E>` that extends `_ListDelegate<E>`.
+	1. This class will hold all the enhancements for `List`.
+9. Override `createDelegateDelegateForInit` and change the return type to `List` and return `new ListDelegateDelegate<>(this);`
+	1. ListDelegateDelegate will be created in the later steps.
+#### `_DelegateDelegate`
+- This class is called "DelegateDelegate" because it delegates the method calls to `Delegate` instance. `_DelegateDelegate`'s subclass, `DelegateDelegate`, will inherit the target class so the users can retrieve it using `unEtc()` if the API they want to use expects `ArrayList`. 
+- **If the target class is final, `_DelegateDelegate` and `DelegateDelegate` aren't needed and the users are expected to use `impl()`**.
+10. Create a class named `_ListDelegateDelegate<E>` that implements `List<E>`
+	1. `_DelegateDelegate` implements or extends the target class.
+11. Create a private final `ListDelegate<E>` field named `delegate` and generate delegate methods for all the methods of `delegate`.
+	1. `impl()` and `unEtc()` are probably unnecessary but they can stay.
+	2. This is probably not different from generating the delegate methods for `List<E>` at this point.
+12. Create a package-private method `delegate()` that returns `delegate`.
+	1. This is to allow `EtcList<E>` to access `delegate` in `EtcList.of` which will be created in the later steps.
+
